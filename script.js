@@ -3,86 +3,80 @@
 let money = 0;
 let upgradeLevel = 1;
 let upgradeCost = 2;
+let autoClickers = 0;
+let autoClickerCost = 10;
+let autoClickerInterval;
 
 const clickerCircle = document.getElementById('clicker-circle');
 const moneyDisplay = document.getElementById('money');
 const upgradeBtn = document.getElementById('upgrade-btn');
 const upgradeLevelDisplay = document.getElementById('upgrade-level');
+const shopBtn = document.getElementById('shop-btn');
+const shopMenu = document.getElementById('shop-menu');
+const buyAutoClickerBtn = document.getElementById('buy-auto-clicker-btn');
 
-// Load saved data on page load
+// Load saved data when the page is loaded
 window.addEventListener('load', () => {
     loadGame();
 });
 
-// Save game data to localStorage
-function saveGame() {
-    const gameData = {
-        money,
-        upgradeLevel,
-        upgradeCost
-        // Add more properties if needed
-    };
-
-    localStorage.setItem('moneyClickerGameData', JSON.stringify(gameData));
-}
-
-// Load game data from localStorage
-function loadGame() {
-    const savedData = localStorage.getItem('moneyClickerGameData');
-
-    if (savedData) {
-        const parsedData = JSON.parse(savedData);
-
-        money = parsedData.money;
-        upgradeLevel = parsedData.upgradeLevel;
-        upgradeCost = parsedData.upgradeCost;
-
-        // Update displays with loaded data
-        moneyDisplay.textContent = money;
-        upgradeLevelDisplay.textContent = upgradeLevel;
-        updateUpgradeCostDisplay();
-    }
-}
-
-// Add a function to reset the game
-function resetGame() {
-    localStorage.removeItem('moneyClickerGameData');
-    money = 0;
-    upgradeLevel = 1;
-    upgradeCost = 2;
-    moneyDisplay.textContent = money;
-    upgradeLevelDisplay.textContent = upgradeLevel;
-    updateUpgradeCostDisplay();
-}
-
-// Clicker circle event listener
 clickerCircle.addEventListener('click', () => {
-    money += upgradeLevel;
+    money += upgradeLevel; // Increase money based on the upgrade level
     moneyDisplay.textContent = money;
-    saveGame(); // Save game data after each click
+    saveGame(); // Save the game data
 });
 
-// Upgrade button event listener
 upgradeBtn.addEventListener('click', () => {
     if (money >= upgradeCost) {
         money -= upgradeCost;
         upgradeLevel += 1;
-        upgradeCost = Math.ceil(upgradeCost * 1.1);
+        upgradeCost = Math.ceil(upgradeCost * 1.1); // Increase cost by 10% (adjust as needed)
+
+        // Update displays
         moneyDisplay.textContent = money;
         upgradeLevelDisplay.textContent = upgradeLevel;
         updateUpgradeCostDisplay();
-        saveGame(); // Save game data after upgrading
+        saveGame(); // Save the game data
     } else {
         alert("Not enough money to upgrade!");
     }
 });
 
-// Function to update upgrade cost display
+shopBtn.addEventListener('click', () => {
+    shopMenu.style.display = 'block';
+});
+
+buyAutoClickerBtn.addEventListener('click', () => {
+    if (money >= autoClickerCost) {
+        money -= autoClickerCost;
+        autoClickers += 1;
+        autoClickerCost = Math.ceil(autoClickerCost * 1.2); // Increase cost by 20% (adjust as needed)
+
+        // Start the auto-clicker interval if not already running
+        if (!autoClickerInterval) {
+            autoClickerInterval = setInterval(() => {
+                money += autoClickers;
+                moneyDisplay.textContent = money;
+            }, 1000); // 1000 milliseconds = 1 second
+        }
+
+        // Update displays
+        moneyDisplay.textContent = money;
+        updateAutoClickerCostDisplay();
+        saveGame(); // Save the game data
+    } else {
+        alert("Not enough money to buy auto-clicker!");
+    }
+});
+
 function updateUpgradeCostDisplay() {
     upgradeBtn.textContent = `Upgrade Clicker ($${upgradeCost})`;
 }
 
-// Function to create snowflakes
+function updateAutoClickerCostDisplay() {
+    buyAutoClickerBtn.textContent = `Buy AutoClicker ($${autoClickerCost})`;
+}
+
 function createSnowflakes() {
     const snowflakesContainer = document.querySelector('.snowflakes');
 
@@ -93,6 +87,36 @@ function createSnowflakes() {
         snowflake.style.animationDuration = `${Math.random() * 2 + 3}s`;
         snowflakesContainer.appendChild(snowflake);
     }
+}
+
+function saveGame() {
+    document.cookie = `money=${money}; expires=${new Date(Date.now() + 31536000000).toUTCString()}`; // 1 year expiration
+    document.cookie = `upgradeLevel=${upgradeLevel}`;
+    document.cookie = `autoClickers=${autoClickers}`;
+}
+
+function loadGame() {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        switch (name) {
+            case 'money':
+                money = parseInt(value) || 0;
+                break;
+            case 'upgradeLevel':
+                upgradeLevel = parseInt(value) || 1;
+                break;
+            case 'autoClickers':
+                autoClickers = parseInt(value) || 0;
+                break;
+        }
+    }
+
+    // Update displays
+    moneyDisplay.textContent = money;
+    upgradeLevelDisplay.textContent = upgradeLevel;
+    updateUpgradeCostDisplay();
+    updateAutoClickerCostDisplay();
 }
 
 createSnowflakes();
