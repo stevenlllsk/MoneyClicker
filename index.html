@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="changelog-handler.js" defer></script>
+    <title>Money Clicker</title>
+</head>
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <!-- Snowflakes will be generated here via JavaScript -->
+    </div>
+
+    <div class="clicker-container">
+        <div class="money-display">
+            <p>Money: $<span id="money">0</span></p>
+        </div>
+        <div class="clicker-circle" id="clicker-circle"></div>
+        <div class="upgrade-menu" id="upgrade-menu">
+            <button id="upgrade-btn" onclick="upgradeClicker()">Upgrade Clicker</button>
+            <p>Upgrade Level: <span id="upgrade-level">1</span></p>
+        </div>
+        <button id="changelog-btn" onclick="showChangelog()">Show Changelog</button>
+    </div>
+
+    <div id="changelog-menu">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <h2>Changelog</h2>
+        <pre>
+            Version 1.0 (Initial Release)
+            - Basic Money Clicker functionality
+            - Upgrade system with gradual difficulty
+            - Snow effect in the background
+
+            Version 1.1
+            - Improved UI styling for better user experience
+            - Adjusted upgrade cost increase for smoother progression
+            - Fixed zoom bug when interacting with the changelog menu and upgrade button
+        </pre>
+        <button class="close-btn" onclick="closeChangelog()">Close</button>
+    </div>
+</body>
+</html>
