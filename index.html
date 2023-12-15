@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,34 +24,38 @@
             <p>Upgrade Level: <span id="upgrade-level">1</span></p>
         </div>
         <button id="changelog-btn" onclick="showChangelog()">Show Changelog</button>
-        <button id="shop-btn" onclick="showShopMenu()">Open Shop</button>
-    </div>
-
-    <div id="changelog-menu">
-        <h2>Changelog</h2>
-        <pre>
-            Version 1.0 (Initial Release)
-        - Basic Money Clicker functionality
-        - Upgrade system with gradual difficulty
-        - Snow effect in the background
-
-        Version 1.1
-        - Improved UI styling for better user experience
-        - Adjusted upgrade cost increase for smoother progression
-        - Fixed zoom bug when interacting with the changelog menu and upgrade button
-
-        Version 1.2
-        - Added shop functionality with auto-clickers for automatic money generation
-        - Implemented save and load functions to persist game progress
-        </pre>
-        <button class="close-btn" onclick="closeChangelog()">Close</button>
+        <button id="shop-btn" onclick="openShop()">Open Shop</button>
     </div>
 
     <div id="shop-menu">
         <h2>Shop</h2>
-        <p>AutoClicker: <span id="auto-clickers">0</span></p>
-        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy AutoClicker</button>
-        <button class="close-btn" onclick="closeShopMenu()">Close Shop</button>
+        <p>AutoClicker: <span id="auto-clicker-count">0</span></p>
+        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy AutoClicker ($10)</button>
+        <button class="close-btn" onclick="closeShop()">Close Shop</button>
+    </div>
+
+    <div id="changelog-menu">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <h2>Changelog</h2>
+        <pre>
+            Version 1.0 (Initial Release)
+            - Basic Money Clicker functionality
+            - Upgrade system with gradual difficulty
+            - Snow effect in the background
+
+            Version 1.1
+            - Improved UI styling for better user experience
+            - Adjusted upgrade cost increase for smoother progression
+            - Fixed zoom bug when interacting with the changelog menu and upgrade button
+
+            Version 1.2
+            - Added shop functionality with auto-clickers for automatic money generation
+            - Implemented save and load functions to persist game progress
+
+            Version 1.2.2
+            - Fixed an issue where the close button in the shop menu was not closing the shop
+        </pre>
+        <button class="close-btn" onclick="closeChangelog()">Close</button>
     </div>
 </body>
 </html>
