@@ -14,6 +14,7 @@ const upgradeLevelDisplay = document.getElementById('upgrade-level');
 const shopBtn = document.getElementById('shop-btn');
 const shopMenu = document.getElementById('shop-menu');
 const buyAutoClickerBtn = document.getElementById('buy-auto-clicker-btn');
+const autoClickerCountDisplay = document.getElementById('auto-clicker-count');
 
 // Load saved data when the page is loaded
 window.addEventListener('load', () => {
@@ -63,6 +64,7 @@ buyAutoClickerBtn.addEventListener('click', () => {
         // Update displays
         moneyDisplay.textContent = money;
         updateAutoClickerCostDisplay();
+        updateAutoClickerDisplay(); // Update the display for auto-clickers
         saveGame(); // Save the game data
     } else {
         alert("Not enough money to buy auto-clicker!");
@@ -75,6 +77,10 @@ function updateUpgradeCostDisplay() {
 
 function updateAutoClickerCostDisplay() {
     buyAutoClickerBtn.textContent = `Buy AutoClicker ($${autoClickerCost})`;
+}
+
+function updateAutoClickerDisplay() {
+    autoClickerCountDisplay.textContent = autoClickers;
 }
 
 function createSnowflakes() {
@@ -90,33 +96,37 @@ function createSnowflakes() {
 }
 
 function saveGame() {
-    document.cookie = `money=${money}; expires=${new Date(Date.now() + 31536000000).toUTCString()}`; // 1 year expiration
-    document.cookie = `upgradeLevel=${upgradeLevel}`;
-    document.cookie = `autoClickers=${autoClickers}`;
+    // Save relevant game data to localStorage
+    localStorage.setItem('money', money);
+    localStorage.setItem('upgradeLevel', upgradeLevel);
+    localStorage.setItem('autoClickers', autoClickers);
 }
 
 function loadGame() {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-        const [name, value] = cookie.split('=');
-        switch (name) {
-            case 'money':
-                money = parseInt(value) || 0;
-                break;
-            case 'upgradeLevel':
-                upgradeLevel = parseInt(value) || 1;
-                break;
-            case 'autoClickers':
-                autoClickers = parseInt(value) || 0;
-                break;
-        }
+    // Load relevant game data from localStorage
+    const savedMoney = localStorage.getItem('money');
+    const savedUpgradeLevel = localStorage.getItem('upgradeLevel');
+    const savedAutoClickers = localStorage.getItem('autoClickers');
+
+    if (savedMoney !== null) {
+        money = parseInt(savedMoney);
+        moneyDisplay.textContent = money;
     }
 
-    // Update displays
-    moneyDisplay.textContent = money;
-    upgradeLevelDisplay.textContent = upgradeLevel;
-    updateUpgradeCostDisplay();
-    updateAutoClickerCostDisplay();
+    if (savedUpgradeLevel !== null) {
+        upgradeLevel = parseInt(savedUpgradeLevel);
+        upgradeLevelDisplay.textContent = upgradeLevel;
+        updateUpgradeCostDisplay();
+    }
+
+    if (savedAutoClickers !== null) {
+        autoClickers = parseInt(savedAutoClickers);
+        updateAutoClickerDisplay();
+    }
+}
+
+function closeShop() {
+    shopMenu.style.display = 'none';
 }
 
 createSnowflakes();
