@@ -128,15 +128,18 @@ body {
 
 #shop-menu {
     position: absolute;
-    top: 120px; /* Adjust the top position as needed */
+    top: 50%; /* Center the menu vertically */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background-color: #2c2c2c;
     color: #ffffff;
     padding: 20px;
     border-radius: 5px;
     z-index: 1001;
     display: none; /* Initially hide the shop menu */
+    max-width: 80%; /* Set a maximum width */
+    max-height: 80%; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
     touch-action: manipulation; /* Added for touch devices */
 }
 
@@ -178,15 +181,18 @@ body {
 
 #changelog-menu {
     position: absolute;
-    top: 120px; /* Adjust the top position as needed */
+    top: 50%; /* Center the menu vertically */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background-color: #2c2c2c;
     color: #ffffff;
     padding: 20px;
     border-radius: 5px;
     z-index: 1001;
     display: none; /* Initially hide the changelog menu */
+    max-width: 80%; /* Set a maximum width */
+    max-height: 80%; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
     touch-action: manipulation; /* Added for touch devices */
 }
 
