@@ -1,0 +1,78 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="changelog-handler.js" defer></script>
+    <title>Money Clicker</title>
+</head>
+
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <!-- Snowflakes will be generated here via JavaScript -->
+    </div>
+
+    <div class="clicker-container">
+        <div class="money-display">
+            <p>Money: $<span id="money">0</span></p>
+        </div>
+        <div class="clicker-circle" id="clicker-circle"></div>
+        <div class="upgrade-menu" id="upgrade-menu">
+            <button id="upgrade-btn" onclick="upgradeClicker()">Upgrade Clicker</button>
+            <p>Upgrade Level: <span id="upgrade-level">1</span></p>
+        </div>
+        <button id="changelog-btn" onclick="showChangelog()">Show Changelog</button>
+        <button id="shop-btn" onclick="openShop()">Open Shop</button>
+    </div>
+
+    <div id="shop-menu">
+        <h2>Shop</h2>
+        <p>AutoClicker: <span id="auto-clicker-count">0</span></p>
+        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy AutoClicker ($<span id="auto-clicker-cost">10</span>)</button>
+        <button class="close-btn" onclick="closeShop()">Close Shop</button>
+    </div>
+
+    <div id="changelog-menu">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <h2>Changelog</h2>
+        <pre>
+            Version 1.0 (Initial Release)
+            - Basic Money Clicker functionality
+            - Upgrade system with gradual difficulty
+            - Snow effect in the background
+
+            Version 1.1
+            - Improved UI styling for better user experience
+            - Adjusted upgrade cost increase for smoother progression
+            - Fixed zoom bug when interacting with the changelog menu and upgrade button
+
+            Version 1.2
+            - Added shop functionality with auto-clickers for automatic money generation
+            - Implemented save and load functions to persist game progress
+
+            Version 1.2.2
+            - Fixed an issue where the close button in the shop menu was not closing the shop
+
+            Version 1.3
+            - Saving Upgrade and AutoClicker Costs:
+                Updated the save function to include the costs of upgrades and AutoClickers, ensuring they persist correctly when exiting and reentering the game.
+            - Bug Fix: Resetting Costs to 2:
+                Addressed a bug where the cost of upgrades would reset to 2; now the cost should be correctly maintained when reentering the game.
+            - AutoClickers Initialization:
+                AutoClickers are now initialized correctly when entering the game, ensuring they work instantly.
+            - Improved Save Function:
+                Enhanced the save function to ensure better persistence and accuracy for upgrade and AutoClicker data.
+
+            Version 1.3.1
+            - AutoClicker and Progression Improvements:
+                Reduced the cost of AutoClickers for better progression and improved overall game progression.
+        </pre>
+        <button class="close-btn" onclick="closeChangelog()">Close</button>
+    </div>
+</body>
+
+</html>
