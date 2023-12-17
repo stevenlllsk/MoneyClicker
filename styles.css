@@ -11,6 +11,10 @@ body {
     color: #ffffff;
     overflow: hidden; /* Prevent scroll bars from appearing */
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .snowflakes {
