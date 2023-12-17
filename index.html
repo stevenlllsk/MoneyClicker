@@ -32,7 +32,7 @@
     <div id="shop-menu">
         <h2>Shop</h2>
         <p>AutoClicker: <span id="auto-clicker-count">0</span></p>
-        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy Miner (1/sec) ($10)</button>
+        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy AutoClicker ($<span id="auto-clicker-cost">10</span>)</button>
         <button class="close-btn" onclick="closeShop()">Close Shop</button>
     </div>
 
@@ -54,10 +54,22 @@
             - Added shop functionality with auto-clickers for automatic money generation
             - Implemented save and load functions to persist game progress
 
-            Version 1.2.8
-            - Changed AutoClicker name to "Miner (1/sec)"
-            - Implemented fix for text selection, disabling it entirely
-            - Fixed an issue where the cost for upgrades and AutoClickers was not saving
+            Version 1.2.2
+            - Fixed an issue where the close button in the shop menu was not closing the shop
+
+            Version 1.3
+            - Saving Upgrade and AutoClicker Costs:
+                Updated the save function to include the costs of upgrades and AutoClickers, ensuring they persist correctly when exiting and reentering the game.
+            - Bug Fix: Resetting Costs to 2:
+                Addressed a bug where the cost of upgrades would reset to 2; now the cost should be correctly maintained when reentering the game.
+            - AutoClickers Initialization:
+                AutoClickers are now initialized correctly when entering the game, ensuring they work instantly.
+            - Improved Save Function:
+                Enhanced the save function to ensure better persistence and accuracy for upgrade and AutoClicker data.
+
+            Version 1.3.1
+            - AutoClicker and Progression Improvements:
+                Reduced the cost of AutoClickers for better progression and improved overall game progression.
         </pre>
         <button class="close-btn" onclick="closeChangelog()">Close</button>
     </div>
