@@ -19,6 +19,8 @@ const autoClickerCountDisplay = document.getElementById('auto-clicker-count');
 // Load saved data when the page is loaded
 window.addEventListener('load', () => {
     loadGame();
+    updateSavedUpgradeCost(); // Update the displayed upgrade cost
+    initializeAutoClickers(); // Initialize AutoClickers
 });
 
 clickerCircle.addEventListener('click', () => {
@@ -75,12 +77,31 @@ function updateUpgradeCostDisplay() {
     upgradeBtn.textContent = `Upgrade Clicker ($${upgradeCost})`;
 }
 
+// Add this function to update the displayed upgrade cost after loading the game
+function updateSavedUpgradeCost() {
+    const savedUpgradeCost = localStorage.getItem('upgradeCost');
+    if (savedUpgradeCost !== null) {
+        upgradeCost = parseInt(savedUpgradeCost);
+        updateUpgradeCostDisplay();
+    }
+}
+
 function updateAutoClickerCostDisplay() {
-    buyAutoClickerBtn.textContent = `Buy Miner (1/sec) ($${autoClickerCost})`;
+    buyAutoClickerBtn.textContent = `Buy AutoClicker ($${autoClickerCost})`;
 }
 
 function updateAutoClickerDisplay() {
     autoClickerCountDisplay.textContent = autoClickers;
+}
+
+function initializeAutoClickers() {
+    // Initialize AutoClickers when entering the game
+    if (autoClickers > 0 && !autoClickerInterval) {
+        autoClickerInterval = setInterval(() => {
+            money += autoClickers;
+            moneyDisplay.textContent = money;
+        }, 1000);
+    }
 }
 
 function createSnowflakes() {
@@ -99,17 +120,17 @@ function saveGame() {
     // Save relevant game data to localStorage
     localStorage.setItem('money', money);
     localStorage.setItem('upgradeLevel', upgradeLevel);
-    localStorage.setItem('upgradeCost', upgradeCost);
     localStorage.setItem('autoClickers', autoClickers);
-    localStorage.setItem('autoClickerCost', autoClickerCost);
+    localStorage.setItem('upgradeCost', upgradeCost); // Save the upgrade cost
+    localStorage.setItem('autoClickerCost', autoClickerCost); // Save the AutoClicker cost
 }
 
 function loadGame() {
     // Load relevant game data from localStorage
     const savedMoney = localStorage.getItem('money');
     const savedUpgradeLevel = localStorage.getItem('upgradeLevel');
-    const savedUpgradeCost = localStorage.getItem('upgradeCost');
     const savedAutoClickers = localStorage.getItem('autoClickers');
+    const savedUpgradeCost = localStorage.getItem('upgradeCost');
     const savedAutoClickerCost = localStorage.getItem('autoClickerCost');
 
     if (savedMoney !== null) {
@@ -123,14 +144,14 @@ function loadGame() {
         updateUpgradeCostDisplay();
     }
 
-    if (savedUpgradeCost !== null) {
-        upgradeCost = parseInt(savedUpgradeCost);
-        updateUpgradeCostDisplay();
-    }
-
     if (savedAutoClickers !== null) {
         autoClickers = parseInt(savedAutoClickers);
         updateAutoClickerDisplay();
+    }
+
+    if (savedUpgradeCost !== null) {
+        upgradeCost = parseInt(savedUpgradeCost);
+        updateUpgradeCostDisplay();
     }
 
     if (savedAutoClickerCost !== null) {
