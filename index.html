@@ -1,6 +1,7 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,6 +10,7 @@
     <script src="changelog-handler.js" defer></script>
     <title>Money Clicker</title>
 </head>
+
 <body>
     <div class="snowflakes" aria-hidden="true">
         <!-- Snowflakes will be generated here via JavaScript -->
@@ -30,7 +32,7 @@
     <div id="shop-menu">
         <h2>Shop</h2>
         <p>AutoClicker: <span id="auto-clicker-count">0</span></p>
-        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy AutoClicker ($10)</button>
+        <button id="buy-auto-clicker-btn" onclick="buyAutoClicker()">Buy Miner (1/sec) ($10)</button>
         <button class="close-btn" onclick="closeShop()">Close Shop</button>
     </div>
 
@@ -52,10 +54,13 @@
             - Added shop functionality with auto-clickers for automatic money generation
             - Implemented save and load functions to persist game progress
 
-            Version 1.2.2
-            - Fixed an issue where the close button in the shop menu was not closing the shop
+            Version 1.2.8
+            - Changed AutoClicker name to "Miner (1/sec)"
+            - Implemented fix for text selection, disabling it entirely
+            - Fixed an issue where the cost for upgrades and AutoClickers was not saving
         </pre>
         <button class="close-btn" onclick="closeChangelog()">Close</button>
     </div>
 </body>
+
 </html>
