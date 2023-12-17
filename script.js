@@ -76,7 +76,7 @@ function updateUpgradeCostDisplay() {
 }
 
 function updateAutoClickerCostDisplay() {
-    buyAutoClickerBtn.textContent = `Buy AutoClicker ($${autoClickerCost})`;
+    buyAutoClickerBtn.textContent = `Buy Miner (1/sec) ($${autoClickerCost})`;
 }
 
 function updateAutoClickerDisplay() {
@@ -99,14 +99,18 @@ function saveGame() {
     // Save relevant game data to localStorage
     localStorage.setItem('money', money);
     localStorage.setItem('upgradeLevel', upgradeLevel);
+    localStorage.setItem('upgradeCost', upgradeCost);
     localStorage.setItem('autoClickers', autoClickers);
+    localStorage.setItem('autoClickerCost', autoClickerCost);
 }
 
 function loadGame() {
     // Load relevant game data from localStorage
     const savedMoney = localStorage.getItem('money');
     const savedUpgradeLevel = localStorage.getItem('upgradeLevel');
+    const savedUpgradeCost = localStorage.getItem('upgradeCost');
     const savedAutoClickers = localStorage.getItem('autoClickers');
+    const savedAutoClickerCost = localStorage.getItem('autoClickerCost');
 
     if (savedMoney !== null) {
         money = parseInt(savedMoney);
@@ -119,9 +123,19 @@ function loadGame() {
         updateUpgradeCostDisplay();
     }
 
+    if (savedUpgradeCost !== null) {
+        upgradeCost = parseInt(savedUpgradeCost);
+        updateUpgradeCostDisplay();
+    }
+
     if (savedAutoClickers !== null) {
         autoClickers = parseInt(savedAutoClickers);
         updateAutoClickerDisplay();
+    }
+
+    if (savedAutoClickerCost !== null) {
+        autoClickerCost = parseInt(savedAutoClickerCost);
+        updateAutoClickerCostDisplay();
     }
 }
 
